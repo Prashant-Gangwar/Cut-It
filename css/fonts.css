@@ -1,0 +1,22 @@
+@charset "utf-8";
+
+/* CSS Document */
+
+/* Montserrat font definitions */
+@font-face{
+    font-family: "Montserrat";
+    src: url('Montserrat/Montserrat-Regular.otf'),
+    url('Montserrat/Montserrat-Regular.otf'); /* IE */
+}
+
+@font-face{
+    font-family: "MontserratBold";
+    src: url('Montserrat/Montserrat-Bold.otf'),
+    url('Montserrat/Montserrat-Bold.otf'); /* IE */
+}
+
+@font-face{
+    font-family: "MontserratLight";
+    src: url('Montserrat/Montserrat-Light.otf'),
+    url('Montserrat/Montserrat-Light.otf'); /* IE */
+}

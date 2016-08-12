@@ -1,0 +1,5 @@
+RewriteEngine On
+
+RewriteRule ^([A-Za-z0-9]+)$ redirect.php?short_url=$l
+
+RewriteRule ^index index.php [L]
