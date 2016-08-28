@@ -5,6 +5,9 @@ body {
 	font-family: 'Montserrat' !important, sans-serif;
 	font-weight: 400;
 	padding: 0 !important;
+	font-size: 1.5em;
+	background-color: black;
+	color: white;
 }
 
 a, a:active, a:focus, button, button:focus, button:active, .btn, .btn:focus, .btn:active:focus, .btn.active:focus, .btn.focus, .btn.focus:active, .btn.active.focus {

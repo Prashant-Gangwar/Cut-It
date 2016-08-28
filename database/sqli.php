@@ -10,9 +10,9 @@
 		global $q;
 		return $q->query($sql);
 	}
+
 	function qExecuteObject($sql)
 	{
-		
 		global $q;
 		$rs = $q->query($sql);
 		if($rs->num_rows==0)

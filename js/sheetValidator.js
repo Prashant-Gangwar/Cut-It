@@ -48,7 +48,7 @@
 	}
 
 	// Adopted from http://stackoverflow.com/a/276622/5211579
-	function isValidDate(date)
+	/*function isValidDate(date)
 	{
 	    var matches = /^(\d{1,2})\-(\d{1,2})\-(\d{4})$/.exec(date);
 	    if (matches == null) return false;
@@ -61,7 +61,7 @@
 	            composedDate.getMonth() == m &&
 	            composedDate.getFullYear() == y;
 	}
-
+*/
 	function validatePattern(el, strict, warn) {
 		var $this = undefined;
 		if (typeof(el) != 'undefined')
@@ -95,7 +95,7 @@
 			return setValid($this);
 	}
 
-	function validateDate(el) {
+	/*function validateDate(el) {
 		var $this = undefined;
 		if (typeof(el) != 'undefined')
 			$this = $(el);
@@ -111,7 +111,7 @@
 		dateTo.setDate(dateTo.getDate() + 1);	// add a day, since JS Date automatically added time
 		if (dateInput < dateTo) return setValid($this);
 		else return setInvalid($this, "Please select a valid date (uptil today's date).");
-	}
+	}*/
 
 	function sheetValidator(options) {
 		//console.log(JSON.stringify(options));

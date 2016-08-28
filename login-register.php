@@ -15,7 +15,7 @@
 				<div class="vertical-space-30"></div>
 
 				<div class="form-horizontal">
-					<form class="form-horizontal" id="login-form" method="post" action="database/db_v2">
+					<form class="form-horizontal" id="login-form" method="post" action="database/login_register.php">
 
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Email</label>
@@ -96,7 +96,7 @@
 				<div class="vertical-space-30"></div>
 
 				<div class="form-horizontal">
-					<form class="form-horizontal" id="forgotpwd-form" method="post" action="database/db_v2">
+					<form class="form-horizontal" id="forgotpwd-form" method="post" action="database/login_register.php">
 
 						<div class="form-group">
 							<label class="col-sm-2 control-label">Email</label>
@@ -142,7 +142,7 @@
 				<div class="vertical-space-30"></div>
 
 				<div class="form-horizontal">
-					<form class="form-horizontal" id="register-form" method="post" action="database/db_v2">
+					<form class="form-horizontal" id="register-form" method="post" action="database/login_register.php">
 
 						<div class="form-group">
 							<label class="col-sm-3 control-label">Name</label>
@@ -235,10 +235,11 @@
 		$("#register-form").sheetValidator();
 		$("#forgotpwd-form").sheetValidator();
 
+		
 		//Login Form Post via AJAX
 		var loginForm = $("#login-form");
-		/*$(loginForm).ajaxForm({
-			url : "database/db_v2.php",
+		$(loginForm).ajaxForm({
+			url : "database/login_register.php",
 			method: 'post',
 			dataType: 'json',
 			beforeSubmit : function(formFields, $form) {
@@ -255,10 +256,11 @@
 				} else {
 					$("#loginErrorText").text(response.message);
 				}
+			complete: alert("hello");
 			},
-/*			complete: hideLoader
+			
 		});
-*/		
+		
 		///Login Form Validation Scripts
 		function validateInputsLogin(formId) {
 			if (!$("#email_log").sheetValidator({ "validatePattern" : true })) {
@@ -283,7 +285,7 @@
 		//Register Form Post via AJAX
 		/*var registerForm = $("#register-form");
 		$(registerForm).ajaxForm({
-			url : "database/db_v2.php",
+			url : "database/login_register.php",
 			method: 'post',
 			dataType: 'json',
 			beforeSubmit : function(formFields, $form) {
@@ -301,8 +303,9 @@
 					$("#registerErrorText").text(response.message);
 				}
 			},
-/*			complete: hideLoader
-		});*/
+			complete: hideLoader
+		});
+		*/
 		//Register Form Validation Scripts
 		function validateInputsRegister(formId) {
 			if (!$("#name").sheetValidator({ "validatePattern" : true })) {
@@ -351,5 +354,3 @@
 
 </script>
 
-<!-- <script type="text/javascript" src="assets/js/bootstrap-filestyle.js"></script>
- -->
