@@ -38,7 +38,7 @@ if (!$include_success || !$q)
 		$exists = qSelectObject('urls', 'url, short_url', $exists_array);
 		$short_url = $exists->short_url;
 
-		echo "<img src='includes/qr_img/php/qr_img.php?d=http://localhost/prashant/{$short_url}' width=\"100%\" height=\"100%\" alt=\"QR Code Image\" style=\" border: 2px solid orange; max-height: 300px; max-width: 300px;\">"."<p><small>"."(Right click on the QRcode and save it)"."</small></p>";
+		echo "<img src='includes/qr_img/php/qr_img.php?d=cut-netne.net/{$short_url}' width=\"100%\" height=\"100%\" alt=\"QR Code Image\" style=\" border: 2px solid orange; max-height: 300px; max-width: 300px;\">"."<p><small>"."(Right click on the QRcode and save it)"."</small></p>";
 
 		//$_SESSION['feedback'] = "<a href='localhost/$short_url'><b><big><big>localhost/" . $short_url . "</big></big></b></a>";;
 		//echo "\n Generated Short URL : " . "<a href='localhost/$short_url'><b><big><big>localhost/" . $short_url . "</big></big></b></a>";
@@ -50,7 +50,7 @@ if (!$include_success || !$q)
 
 		//echo "\nInsert ID: " . $insert_id;
 		$short_url = generateCode($insert_id);
-		echo "<img src='includes/qr_img/php/qr_img.php?d=http://localhost/prashant/{$short_url}' width=\"100%\" height=\"100%\" alt=\"QR Code Image\" style=\" border: 2px solid orange; max-height: 300px; max-width: 300px;\">"."<p><small>"."(Right click on the QRcode and save it)"."</small></p>";
+		echo "<img src='includes/qr_img/php/qr_img.php?d=cut-it.netne.net/{$short_url}' width=\"100%\" height=\"100%\" alt=\"QR Code Image\" style=\" border: 2px solid orange; max-height: 300px; max-width: 300px;\">"."<p><small>"."(Right click on the QRcode and save it)"."</small></p>";
 		qExecute("UPDATE urls SET short_url = '$short_url' WHERE id = $insert_id");
 		$qr_data = array('user_id'=>1, 'url' => $url, 'short_url'=> $short_url, 'message' => $msg, 'scanned' => 0, 'active' => 1, 'created_on' => date("Y-m-d"));
 		qInsert('user_qrs', $qr_data);

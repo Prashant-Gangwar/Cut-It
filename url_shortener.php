@@ -14,11 +14,11 @@
 			    	</label>
 			    </center>
 			    <center>
-			    	<input type="url" id="url_input" class="form-control input-lg" style="width:100%; max-width: 900px; color: #00A2B5; border: 1px solid red;" name="url" placeholder="Enter OR Paste Your URL Here ... Example : http://www.google.com" required>
+			    	<input type="url" id="url_input" class="form-control input-lg" style="width:100%; max-width: 900px; color: #00A2B5; border: 1px solid red;" name="url" placeholder="Enter OR Paste Your URL Here ... Example : http://www.google.com" autocomplete="off" required>
 			    </center>
 			    <center>
 			    	<div>
-			    		<input  class="form-control input-lg" id="url_message" name="url_message" <?php if(isset($_SESSION["user_id"])) {} else { echo "hidden" ;}?> style="width:100%; max-width: 900px;  color: #00A2B5; border: 1px solid red; margin:0px; margin-top: 20px;" placeholder="Enter Your Message/Comment about URL here ... " <?php if(isset($_SESSION["user_id"])) { echo "required" ; }?>>
+			    		<input  class="form-control input-lg" id="url_message" name="url_message" <?php if(isset($_SESSION["user_id"])) {} else { echo "hidden" ;}?> style="width:100%; max-width: 900px;  color: #00A2B5; border: 1px solid red; margin:0px; margin-top: 20px;" placeholder="Enter Your Message/Comment about URL here ... " autocomplete="off"  <?php if(isset($_SESSION["user_id"])) { echo "required" ; }?>>
 			    	</div> 
 			    </center>
 			    <center>
@@ -31,7 +31,7 @@
 				</center>
 			    <center>
 			    	<label for="input-lg">
-			    		<h2 style="color:orange;">Be Smart. Use Short URL's.</h2>
+			    		<h2 style="color:orange;"><b>Be Smart. Use Short URL's.</b></h2>
 			    	</label>
 			    </center>
 			</div>

@@ -37,7 +37,7 @@ if (!$include_success || !$q)
 		$exists_array = array('url' => $url);
 		$exists = qSelectObject('urls', 'url, short_url', $exists_array);
 		$short_url = $exists->short_url;
-		echo "\n Generated Short URL : " . "<a href='localhost/$short_url'><b><big><big>localhost/" . $short_url . "</big></big></b></a>";
+		echo "\n Generated Short URL : " . "<a href='www.cut-it.netne.net/$short_url' style='text-justify: inner-word'><b><big><big>cut-netne.net/" . $short_url . "</big></big></b></a>";
 	}
 	else
 	{
@@ -45,7 +45,7 @@ if (!$include_success || !$q)
 		$insert_id = qInsert('urls', $data);
 		//echo "\nInsert ID: " . $insert_id;
 		$short_url = generateCode($insert_id);
-		echo "\n Generated Short URL : " . "<a href='localhost/$short_url'><b><big><big>localhost/" . $short_url . "</big></big></b></a>";
+		echo "\n Generated Short URL : " . "<a href='www.cut-it.netne.net/$short_url' style='text-justify: inner-word'><b><big><big>cut-it.netne.net/" . $short_url . "</big></big></b></a>";
 		qExecute("UPDATE urls SET short_url = '$short_url' WHERE id = $insert_id");
 		$url_data = array('user_id'=>1, 'url' => $url, 'short_url'=> $short_url, 'message' => $msg, 'clicks' => 0, 'active' => 1, 'created_on' => date("Y-m-d"));
 		qInsert('user_urls', $url_data);	

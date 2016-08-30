@@ -17,7 +17,7 @@
 					<center>
 						<div class="form-group col-sm-12 col-xm-12 col-lg-12 insert_url"  style="font-family: 'Montserrat'">
 						      <label for="url" style="font-family: 'Montserratbold'; color: #aaf"><h2>Enter URL</h2></label>
-						      <input class="form-control input-lg" id="qr_url" type="url" style="color: #00A2B5; border: 1px solid red;" placeholder="Example : http://www.google.com" required>
+						      <input class="form-control input-lg" id="qr_url" type="url" style="color: #00A2B5; border: 1px solid red;" placeholder="Example : http://www.google.com" autocomplete="off" required>
 						      <label id="qr_error">Please enter a valid URL!</label>
 					    </div>
 					</center>
@@ -25,13 +25,19 @@
 					<center>
 				     	<div class="form-group col-sm-12 insert_message" <?php if(isset($_SESSION["user_id"])) {} else { echo "hidden" ;}?> style="font-family: 'Montserratbold'">
 					    	  <label for="comment" style="color: #aaf;"><h2>Enter Message</h2></label>
-					    	  <textarea class="form-control input-sm" rows="5" id="qr_message" style="color: #00A2B5; border: 1px solid red; font-size: 1.2em; font-family: 'Montserrat';" placeholder="Enter your message here." <?php if(isset($_SESSION["user_id"])) { echo "required" ; }?>></textarea>
+					    	  <textarea class="form-control input-sm" rows="5" id="qr_message" style="color: #00A2B5; border: 1px solid red; font-size: 1.2em; font-family: 'Montserrat';" placeholder="Enter your message here." autocomplete="off" <?php if(isset($_SESSION["user_id"])) { echo "required" ; }?>></textarea>
 				    	</div>
 					
 					<div class="col-lg-12">
 						<br>
 				    	<button type="submit" id="qr_submit_button" onclick="javascript:void(0);"  class="btn-lg btn-success text-center " ><big style="font-family: 'Montserratbold' !important;">CUT IT | Press To Generate QR Code</big></button>
 				 	</div>
+
+				 	<center>
+				    	<label for="input-lg">
+				    		<h2 style="color:orange;"><b>Be Creative. Use QR Codes.</b></h2>
+				    	</label>
+			    	</center>
 					<?php if(isset($_SESSION["user_id"])) {} else { echo "<br><br><br>";} ?>
 
 					</center>

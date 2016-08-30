@@ -67,11 +67,12 @@ unset($_SESSION['url_id'])
 							<label class="col-sm-3 control-label">Status</label>
 							<div class="dropdown col-sm-9 ">
 								<button class="btn btn-primary dropdown-toggle col-sm-5" type="button" data-toggle="dropdown">Active
-								<span class="caret"></span></button>
-									<ul class="dropdown-menu">
-								    	<li>Active</li>
-								    	<li>Not Active</li>
-								  	</ul>
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" style="margin-left: 20px;">
+						    		<li class="text-center" id="update_active">Active</li>
+						    		<li class="text-center" id="update_not_active">Not Active</li>
+							  	</ul>
 							</div>
 						</div>
 						<div class="form-group">
@@ -83,7 +84,7 @@ unset($_SESSION['url_id'])
 
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" onClick="javascript:void(0);" name="login" class="btn btn-default login">
+								<button type="submit" onClick="javascript:void(0);" name="url_update" class="btn btn-default login">
 									Update
 								</button>
 							</div>
@@ -148,7 +149,7 @@ unset($_SESSION['url_id'])
 
 
 <hr style="margin:0; ">
-<div class="container-fluid col-lg-12" style="background-color: black; font-family: 'Montserrat';">
+<div class="row" style="background-color: black; font-family: 'Montserrat'; margin:0">
 	<div class="col-lg-12" style="margin-bottom: 10px ">
 		<div class="text-center" style="margin: 0px;">
 			<h1 style="background-color: #C70D0D; color: white; padding-top: 5px; padding-bottom: 5px; font-weight: bold;  margin-bottom: 10px; border-radius: 4px;" > Hi Prashant! Welcome to CUT IT :)
@@ -192,7 +193,7 @@ unset($_SESSION['url_id'])
 			<br>
 		</div>
 		<hr>
-	
+	</div>
 
 
 	<div class="container-fluid col-lg-12" style="background-color: #00A2B5; color: white; border-radius: 4px; width: 100%; margin-top: 10px; overflow: auto;">
@@ -231,7 +232,7 @@ unset($_SESSION['url_id'])
                 			    echo "<tr>";
 							    	echo "<td class='text-left' style='padding-left:20px'>" . $i . "</td>";
 							    	echo "<td class='text-left' hidden>" . $row_url['id'] . "</td>";
-							        echo "<td class='text-left'><b><a href='http://www.cut-it.net23.net/prashant/{$row_url['short_url']}' >localhost/" . $row_url['short_url'] . "<a></b></td>";
+							        echo "<td class='text-left'><b><a href='http://www.cut-it.net23.net/prashant/{$row_url['short_url']}' >cut.netnet.net/" . $row_url['short_url'] . "<a></b></td>";
 							        echo "<td class='text-left'>" . $row_url['message'] . "</td>";
 							        echo "<td class='text-left'>" . date("d-m-Y", strtotime($row_url['created_date'])); "</td>";
 							        echo "<td>" . $row_url['clicks'] . "</td>";
@@ -273,7 +274,7 @@ unset($_SESSION['url_id'])
                 			    echo "<tr>";
 							    	echo "<td class='text-left' style='padding-left:20px'>" . $i . "</td>";
 							    	echo "<td class='text-left' style='padding-left:20px' hidden>" . $row_qr['id'] . "</td>";
-							        echo "<td class='text-left'>" . "<img src='includes/qr_img/php/qr_img.php?d=http://www.cut-it.net23.net/prashant/{$row_qr['short_url']}' width=\"100%\" height=\"100%\" alt=\"QR Code Image\" style=\" border: 2px solid orange; max-height: 100px; max-width: 100px;\">" . "</td>";
+							        echo "<td class='text-left'>" . "<img src='includes/qr_img/php/qr_img.php?d=http://www.cut-it.net23.net/{$row_qr['short_url']}' width=\"100%\" height=\"100%\" alt=\"QR Code Image\" style=\" border: 2px solid orange; max-height: 100px; max-width: 100px;\">" . "</td>";
 							        echo "<td class='text-left'>" . $row_qr['message'] . "</td>";
 							        echo "<td class='text-left'>" . date("d-m-Y", strtotime($row_qr['created_on'])); "</td>";
 							        echo "<td>" . $row_qr['scanned'] . "</td>";
@@ -329,6 +330,10 @@ table tr:nth-child(odd):hover{
 	background-color: orange;
 	color: white;
 }
+.dropdown-menu li:hover{
+	background-color: orange;
+	color: white;
+}
 
 </style>
 
@@ -373,6 +378,19 @@ $(function(){
 		return false;	
 	});
 
+
+	//TO set active and not active option	
+   	$("#update_active").on('click', function(e){
+		document.getElementById('dropdown-menu').value = "Active";      		
+   	});
+
+	$("#update_not_active").on('click', function(e){
+		document.getElementById('dropdown-menu').value = "Not Active";      		
+   	});
+
+
+
+
 	//To Edit url rows
 	$('.url_edit').on('click', function (e) {
 
@@ -391,8 +409,6 @@ $(function(){
        	document.getElementById('url-modal-created-on').value = created_on;
        	document.getElementById('url-modal-clicks').value = clicks;
        	document.getElementById('url-modal-status').value = status;
-
-
 //		edit_delete("url_edit",id);
 	});
 
