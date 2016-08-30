@@ -27,6 +27,7 @@ function registerUser() {
 	$uemail = strip_tags($_POST['email']);
 	$upassword = strip_tags($_POST['password']);
 	$ucpassword = strip_tags($_POST['cpassword']);
+
 	$validInputs = $uname != '' && $umobile != '' && $uemail != '' && $upassword != '' && ($upassword == $ucpassword);
 	if ($validInputs) {
 
@@ -179,7 +180,7 @@ function changePassword() {
 	}
 	unset($_SESSION);
 }
-
+return;
 // Close DB Connection
 closeConnection();
 ?>

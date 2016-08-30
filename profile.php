@@ -172,19 +172,19 @@ unset($_SESSION['url_id'])
 				      	</form>
 				    </div>
 			</div>
-			<div class="col-lg-5 profile_table" style="overflow: hidden; border-radius: 4px; border: 2px solid black; margin: 40px; background-color: #00A2B5; color: white; height: 250px;"><br>
+			<div class="col-lg-5 col-lg-push-1 profile_table" style="overflow: hidden; border-radius: 4px; border: 2px solid black; margin-top: 40px; background-color: #00A2B5; color: white; height: 250px; min-width: 200px; max-height: 500px"><br>
 				<div class="col-lg-12" style="color: white; display: block;">
 					<ul style="list-style: none; font-size: 1.3em;"><h2><b><u>Profile Details</u></b></h2>
-						<li>
+						<li class="jusitfied">
 							Name : <?php echo $users->name; ?>
 						</li>
-						<li >
+						<li class="justified">
 							Email id : <?php echo $users->email; ?>
 						</li>
-						<li >
+						<li class="justified">
 							Contact No : <?php echo $users->mobile; ?>
 						</li>
-						<li >
+						<li class="justified">
 							Password : <?php echo $users->password; ?>
 						</li>
 					</ul>
@@ -203,7 +203,9 @@ unset($_SESSION['url_id'])
 			    <li class="" id="qr_tab_click"><a href="#qr_tab"><h3 style="margin: 0px; color: black; font-family: 'Montserratbold'">QR Code</h3></a></li>
 		  	</ul>
 		  <br>
-		  
+
+		 <!-- Table for URL shortener history -->
+
 		<div id="url_tab" style="overflow: auto; ">
 	  		<h3 style="margin: 0px; font-family: 'Montserratbold'">URL History</h3>
 			  <p>You can change "message/comment" or delete Short URL generated.</p>
@@ -245,6 +247,9 @@ unset($_SESSION['url_id'])
 			        </tbody>
 			  	</table>
 		</div>
+
+		<!---ENdS here -->
+		<!-- Table for QR history starts here -->
 
 		<div id="qr_tab" style="overflow: auto; ">
 		  	<h3 style="margin: 0px; font-family: 'Montserratbold'">QR Code History</h3>

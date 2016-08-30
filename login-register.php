@@ -238,17 +238,19 @@
 		
 		//Login Form Post via AJAX
 		var loginForm = $("#login-form");
+		console.log(loginForm);
 		$(loginForm).ajaxForm({
+
 			url : "database/login_register.php",
 			method: 'post',
 			dataType: 'json',
 			beforeSubmit : function(formFields, $form) {
+				//console.log("hello");
 				var validInputs = validateInputsLogin();
 				$("#loginErrorText").text("");
 				if (!validInputs) {
 					return false;
 				}
-				showLoader();
 			},
 			success : function(response, statusText, xhr, $form) {
 				if (response.success) {
@@ -283,7 +285,7 @@
 		}
 
 		//Register Form Post via AJAX
-		/*var registerForm = $("#register-form");
+		var registerForm = $("#register-form");
 		$(registerForm).ajaxForm({
 			url : "database/login_register.php",
 			method: 'post',
@@ -294,7 +296,6 @@
 					return false;
 				}
 				$("#registerErrorText").text("");
-				showLoader();
 			},
 			success : function(response, statusText, xhr, $form) {
 				if (response.success) {
@@ -303,9 +304,8 @@
 					$("#registerErrorText").text(response.message);
 				}
 			},
-			complete: hideLoader
 		});
-		*/
+		
 		//Register Form Validation Scripts
 		function validateInputsRegister(formId) {
 			if (!$("#name").sheetValidator({ "validatePattern" : true })) {

@@ -31,6 +31,7 @@ include_once 'database/sqli.php';
   <script type="text/javascript" src="assets/js/jquery.form.min.js"></script>
   <script type="text/javascript" src="assets/js/jquery.maskedinput.min.js"></script>
    -->
+   <script type="text/javascript" src="js/sheetValidator.js"></script>
    <script src="js/common.js"></script>
    <script src="js/jquery.form.min.js"></script>
    <script src="database/login_register.php"></script>
