@@ -2,7 +2,7 @@
 
 include_once 'db_connection.php';
 $include_success = include_once 'sqli.php';
-
+session_start();
 
 if (!$include_success || !$q)
 	die("Couldn't connect to database: " . mysqli_connect_error());
@@ -19,42 +19,68 @@ if (!$include_success || !$q)
 		return;
 	} 
 
-	//$data = array("error" => "This is an error. ", "short_url" => "Short link will come here.");
-	//echo $data['error'];
-	//echo $data['short_url'];
-
-	//if (isset($_SESSION['email_id']))
+	//if user is logged in
+	if(isset($_SESSION['user_id']))
+	{
+		//to check if the link exists in the user_qrs table
+		$query_user_urls = qExecute("SELECT short_url FROM user_qrs WHERE url = '$url'");
 		
-	//To find total clicks on link and then to increase it by one
-	/*$select_where = array('url' => $url, 'short_url' => 'goo13', 'id' => 1000000);
-	$obj = qSelectObject('urls', 'clicks', $select_where);
-	$clicks = $obj->clicks + 1;*/
+		if($query_user_urls->num_rows)
+		{
+			$exists = qSelectObject('user_qrs', 'url, short_url', array('url' => $url));
+			$short_url = $exists->short_url;
 
-	$query = qExecute("SELECT short_url FROM urls WHERE url = '$url'");
+			echo create_qr_img($short_url);
+		}
+		else
+		{
+			$data = array('url' => $url, 'message' => $msg, 'clicks' => 0, 'active' => 1, 'created_date' => date("Y-m-d"));
+			$insert_id = qInsert('urls', $data);
 
-	if($query->num_rows)
-	{	
-		$exists_array = array('url' => $url);
-		$exists = qSelectObject('urls', 'url, short_url', $exists_array);
-		$short_url = $exists->short_url;
+			$short_url = generateCode($insert_id);
+			qExecute("UPDATE urls SET short_url = '$short_url' WHERE id = $insert_id");
 
-		echo "<img src='includes/qr_img/php/qr_img.php?d=cut-netne.net/{$short_url}' width=\"100%\" height=\"100%\" alt=\"QR Code Image\" style=\" border: 2px solid orange; max-height: 300px; max-width: 300px;\">"."<p><small>"."(Right click on the QRcode and save it)"."</small></p>";
+			$qr_data = array('user_id'=>1, 'url' => $url, 'short_url'=> $short_url, 'message' => $msg, 'scanned' => 0, 'active' => 1, 'created_on' => date("Y-m-d"));
+			qInsert('user_qrs', $qr_data);
 
-		//$_SESSION['feedback'] = "<a href='localhost/$short_url'><b><big><big>localhost/" . $short_url . "</big></big></b></a>";;
-		//echo "\n Generated Short URL : " . "<a href='localhost/$short_url'><b><big><big>localhost/" . $short_url . "</big></big></b></a>";
+			echo create_qr_img($short_url);
+		}
+	
 	}
+	//if user is not logged in
 	else
 	{
-		$data = array('url' => $url, 'message' => $msg, 'clicks' => 0, 'active' => 1, 'created_date' => date("Y-m-d"));
-		$insert_id = qInsert('urls', $data);
+		$query_urls = qExecute("SELECT short_url FROM urls WHERE url = '$url'");
+		
+		if($query_urls->num_rows)
+		{
+			$exists = qSelectObject('urls', 'url, short_url', array('url' => $url));
+			$short_url = $exists->short_url;
 
-		//echo "\nInsert ID: " . $insert_id;
-		$short_url = generateCode($insert_id);
-		echo "<img src='includes/qr_img/php/qr_img.php?d=cut-it.netne.net/{$short_url}' width=\"100%\" height=\"100%\" alt=\"QR Code Image\" style=\" border: 2px solid orange; max-height: 300px; max-width: 300px;\">"."<p><small>"."(Right click on the QRcode and save it)"."</small></p>";
-		qExecute("UPDATE urls SET short_url = '$short_url' WHERE id = $insert_id");
-		$qr_data = array('user_id'=>1, 'url' => $url, 'short_url'=> $short_url, 'message' => $msg, 'scanned' => 0, 'active' => 1, 'created_on' => date("Y-m-d"));
-		qInsert('user_qrs', $qr_data);
+			echo create_qr_img($short_url);
+		}
+		else
+		{
+			$data = array('url' => $url, 'message' => $msg, 'clicks' => 0, 'active' => 1, 'created_date' => date("Y-m-d"));
+			$insert_id = qInsert('urls', $data);
+
+			$short_url = generateCode($insert_id);
+
+			qExecute("UPDATE urls SET short_url = '$short_url' WHERE id = $insert_id");
+
+			echo create_qr_img($short_url);
+		}
+
 	}
+
+
+
+//to return QR image
+function create_qr_img($short_url)
+{
+	return "<img src='includes/qr_img/php/qr_img.php?d=cut-netne.net/{$short_url}' width=\"100%\" height=\"100%\" alt=\"QR Code Image\" style=\" border: 2px solid orange; max-height: 300px; max-width: 300px;\">"."<p><small>"."(Right click on the QRcode and save it)"."</small></p>";	
+}
+
 
 //TO generate Short URL
 function generateCode($num)

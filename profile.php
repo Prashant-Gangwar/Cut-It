@@ -8,6 +8,54 @@ $user_qrs = qSelectObject('user_qrs',"id, url, short_url, message, scanned, acti
 unset($_SESSION['url_id'])
 ?>
 
+
+
+<style type="text/css">
+
+
+#profile_table{
+    font-size: 130%;
+}
+th {
+	background-color: #C70D0D; color: white;
+	font-size: 17px !important;
+}
+#profile_table tr {
+	color: white;
+	background: #C70D0D;
+}
+
+table tr:nth-child(even){
+	background-color: white;
+	color: black;
+
+}
+
+table tr:nth-child(odd){
+	background-color: white;
+	color: black;
+}
+
+table tr:nth-child(even):hover{
+	background-color: orange;
+	color: white;
+
+}
+
+table tr:nth-child(odd):hover{
+	background-color: orange;
+	color: white;
+}
+.dropdown-menu li:hover{
+	background-color: orange;
+	color: white;
+}
+
+</style>
+
+
+
+
 <!-- Edit Details Box -->
 <div class="modal fade" id="url-modal" role="dialog">
 	<div class="modal-dialog" style="border-radius: 10px;border: 4px solid #00A2B5;">
@@ -23,7 +71,7 @@ unset($_SESSION['url_id'])
 				<div class="vertical-space-30"></div>
 
 				<div class="form-horizontal">
-					<form class="form-horizontal" id="url-modal-form" method="post" action="database/db_v2">
+					<form class="form-horizontal" id="url-modal-form" method="post" action="edit_delete.php">
 						<div class="form-group" hidden>
 							<div class="col-sm-12">
 								<input type="text" class="form-control" name="id" id="url-modal-id" disabled>
@@ -56,22 +104,17 @@ unset($_SESSION['url_id'])
 								<input type="text" class="form-control" id="url-modal-clicks" name="url-modal-clicks" placeholder="Total Clicks" disabled>
 							</div>
 						</div>
-<!-- 
-						<div class="form-group">
-							<label class="col-sm-3 control-label">Status</label>
-							<div class="col-sm-9">
-								<input type="text" class="form-control" id="url-modal-status" placeholder="Active / Not Active" name="url-modal-status">
-							</div>
-						</div> -->
-						<div class="form-group" style="font-family: 'Montserratbold' ">
+
+						<div class="form-group" >
 							<label class="col-sm-3 control-label">Status</label>
 							<div class="dropdown col-sm-9 ">
-								<button class="btn btn-primary dropdown-toggle col-sm-5" type="button" data-toggle="dropdown">Active
+								<button class="btn btn-primary dropdown-toggle col-sm-5" type="button" data-toggle="dropdown" >
+									<span id="url-modal-status"></span>
 									<span class="caret"></span>
 								</button>
 								<ul class="dropdown-menu" style="margin-left: 20px;">
-						    		<li class="text-center" id="update_active">Active</li>
-						    		<li class="text-center" id="update_not_active">Not Active</li>
+						    		<li class="text-center" id="update_active"><b>Active</b></li>
+						    		<li class="text-center" id="update_not_active"><b>Not Active</b></li>
 							  	</ul>
 							</div>
 						</div>
@@ -84,7 +127,7 @@ unset($_SESSION['url_id'])
 
 						<div class="form-group">
 							<div class="col-sm-offset-2 col-sm-10">
-								<button type="submit" onClick="javascript:void(0);" name="url_update" class="btn btn-default login">
+								<button type="submit" onClick="javascript:void(0);" name="url_update" id="url_update" class="btn btn-default login">
 									Update
 								</button>
 							</div>
@@ -299,49 +342,6 @@ unset($_SESSION['url_id'])
 
 <?php include_once 'includes/footer.php' ?>
 
-<style type="text/css">
-
-
-#profile_table{
-    font-size: 130%;
-}
-th {
-	background-color: #C70D0D; color: white;
-	font-size: 17px !important;
-}
-#profile_table tr {
-	color: white;
-	background: #C70D0D;
-}
-
-table tr:nth-child(even){
-	background-color: white;
-	color: black;
-
-}
-
-table tr:nth-child(odd){
-	background-color: white;
-	color: black;
-}
-
-table tr:nth-child(even):hover{
-	background-color: orange;
-	color: white;
-
-}
-
-table tr:nth-child(odd):hover{
-	background-color: orange;
-	color: white;
-}
-.dropdown-menu li:hover{
-	background-color: orange;
-	color: white;
-}
-
-</style>
-
 
 <script type="text/javascript">
 	
@@ -384,16 +384,14 @@ $(function(){
 	});
 
 
-	//TO set active and not active option	
+	//TO set active and not active option in Edit MODAL 	
    	$("#update_active").on('click', function(e){
-		document.getElementById('dropdown-menu').value = "Active";      		
-   	});
+		$('#url-modal-status').html("Active");   	
+	});
 
 	$("#update_not_active").on('click', function(e){
-		document.getElementById('dropdown-menu').value = "Not Active";      		
-   	});
-
-
+		$('#url-modal-status').html("Not Active");
+	});
 
 
 	//To Edit url rows
@@ -406,16 +404,48 @@ $(function(){
 		var clicks = $(this).closest('tr').find('td:eq(5)').text();
 		var status = $(this).closest('tr').find('td:eq(6)').text();
 
-		alert(id);
+		//alert(status);
 
        	document.getElementById('url-modal-id').value = id;
        	document.getElementById('url-modal-short-url').value = short_url;
        	document.getElementById('url-modal-message').value = msg;
        	document.getElementById('url-modal-created-on').value = created_on;
        	document.getElementById('url-modal-clicks').value = clicks;
-       	document.getElementById('url-modal-status').value = status;
-//		edit_delete("url_edit",id);
+       	$('#url-modal-status').html(status);
+
 	});
+
+	$('#url_update').on('click', function (e) {
+
+	var id = document.getElementById("url-modal-id").value;
+	var msg = document.getElementById("url-modal-message").value;
+	var status = $("#url-modal-status").html();
+
+		$.ajax({
+			type: "POST",
+			url: 'edit_delete.php',
+			data: {	"id": id, 'table_type': "url", "msg": msg, "status": status	},
+			
+			success: function(response){
+
+				console.log(response);
+			}
+		});
+		event.preventDefault();
+		return false;
+	
+	});
+
+	//To delete url rows
+	$('.url_delete').on('click', function (e) {
+
+
+		var id = $(this).closest('tr').find('td:eq(1)').text();
+		alert(id);
+//		edit_delete("url_delete",id);
+
+	});
+	
 
 	//To edit qr rows
 	$('.qr_edit').on('click', function (e) {
@@ -436,19 +466,8 @@ $(function(){
        	document.getElementById('qr-modal-clicks').value = clicks;
        	document.getElementById('qr-modal-status').value = status;
 
-//		edit_delete("qr_edit",id);
-
 	});
 
-	//To delete url rows
-	$('.url_delete').on('click', function (e) {
-
-
-		var id = $(this).closest('tr').find('td:eq(1)').text();
-		alert(id);
-//		edit_delete("url_delete",id);
-
-	});
 	
 	//To delete qr rows
 	$('.qr_delete').on('click', function (e) {

@@ -119,7 +119,7 @@ $(document).ready(function(){
 				    url: 'database/qr_generator.php',
 					data: {	'url': url, 'msg': msg	},
 					success: function(response){
-							alert(response);
+
 							if(response == "Please enter a valid URL!")
 							{
 								$("#qr_error").slideDown("slow");
