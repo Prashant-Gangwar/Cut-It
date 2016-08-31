@@ -9,6 +9,7 @@ if (!$include_success || !$q)
 
 	$url = $_POST['url'];
 	$msg = $_POST['msg'];
+	$user_id = $_SESSION['user_id'];
 
 	$url = trim($url);
 	$msg = trim($msg);
@@ -23,11 +24,11 @@ if (!$include_success || !$q)
 	if(isset($_SESSION['user_id']))
 	{
 		//to check if the link exists in the user_qrs table
-		$query_user_urls = qExecute("SELECT short_url FROM user_qrs WHERE url = '$url'");
+		$query_user_urls = qExecute("SELECT short_url FROM user_qrs WHERE url = '$url' AND user_id = '$user_id'");
 		
 		if($query_user_urls->num_rows)
 		{
-			$exists = qSelectObject('user_qrs', 'url, short_url', array('url' => $url));
+			$exists = qSelectObject('user_qrs', 'url, short_url', array('url' => $url, 'user_id' => $user_id));
 			$short_url = $exists->short_url;
 
 			echo create_qr_img($short_url);
@@ -40,7 +41,7 @@ if (!$include_success || !$q)
 			$short_url = generateCode($insert_id);
 			qExecute("UPDATE urls SET short_url = '$short_url' WHERE id = $insert_id");
 
-			$qr_data = array('user_id'=>1, 'url' => $url, 'short_url'=> $short_url, 'message' => $msg, 'scanned' => 0, 'active' => 1, 'created_on' => date("Y-m-d"));
+			$qr_data = array('user_id'=>$user_id, 'url' => $url, 'short_url'=> $short_url, 'message' => $msg, 'scanned' => 0, 'active' => 1, 'created_on' => date("Y-m-d"));
 			qInsert('user_qrs', $qr_data);
 
 			echo create_qr_img($short_url);
