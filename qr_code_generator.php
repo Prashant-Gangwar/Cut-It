@@ -76,10 +76,10 @@
 	<div class="container col-sm-12" style="padding-left: 5%">
 		<div class="col-sm-2"></div>
 		<div class="button col-sm-4">
-			<img src="images/qr-image1.jpg" width="100%" height="100%" class="img-rounded" alt="QR Code Image" style="border: 2px solid black;">
+			<img src="images/qr-image1.jpg" width="100%" height="100%" class="img-rounded" alt="QR Code Image" class="pics" style="border: 2px solid black; box-shadow: 5px 5px 10px #000000;">
 		</div>&nbsp;
 		<div class="button col-sm-4">
-			<img src="images/qr-image2.jpg" width="100%" height="100%" class="img-rounded" alt="QR Code Image" style="border : 2px solid black;">
+			<img src="images/qr-image2.jpg" width="100%" height="100%" class="img-rounded" alt="QR Code Image" class="pics" style="border: 2px solid black; box-shadow: 5px 5px 10px #000000;">
 		</div>
 		<div class="col-sm-2"></div>
 			&nbsp;
@@ -89,6 +89,14 @@
 	</center>
 </div>
 <hr style="margin: 0">	
+
+
+<style>
+	img:hover{
+		-webkit-filter:contrast(120%) brightness(100%);
+	}
+	
+</style>
 
 <?php include_once 'includes/footer.php' ?>
 
