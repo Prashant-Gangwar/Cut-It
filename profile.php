@@ -9,6 +9,10 @@ $user_qrs = qSelectObject('user_qrs',"id, url, short_url, message, scanned, acti
 
 <style type="text/css">
 
+img:hover{
+		-webkit-filter:contrast(120%) brightness(100%);
+}
+
 #profile_table{
     font-size: 130%;
 }
@@ -202,7 +206,7 @@ table tr:nth-child(odd):hover{
 			<div class="col-lg-push-2 col-lg-4 text-center" id="profile" >
 				<br><br>
 					<div class="text-left">
-			       		<img src="uploads/<?php $dp = qSelectObject('users', 'dp_name', array('user_id'=>$_SESSION['user_id'])); if($dp->dp_name) echo $dp->dp_name; else echo "Please Upload your image"?>" width="200" height="200" class="img-rounded" alt="Upload your Profile Pic" style="border: 2px solid black; margin:0; background-color: black; ">
+			       		<img src="uploads/<?php $dp = qSelectObject('users', 'dp_name', array('user_id'=>$_SESSION['user_id'])); if($dp->dp_name) echo $dp->dp_name; else echo "Please Upload your image"?>" width="200" height="200" class="img-rounded" alt="Upload your Profile Pic" style="border: 2px solid black; margin:0; background-color: black; box-shadow: 5px 5px 10px #000; ">
 			      	</div>
 			      	<div class="form-group text-left" style="margin-bottom: 40px;">
 				      	<form role="form" action="upload_image.php" method="post" enctype="multipart/form-data" id="upload_pic_form">
@@ -215,7 +219,7 @@ table tr:nth-child(odd):hover{
 				      	</form>
 				    </div>
 			</div>
-			<div class="col-lg-5 col-lg-push-1 profile_table" style="overflow: hidden; border-radius: 4px; border: 2px solid black; margin-top: 40px; background-color: #00A2B5; color: white; height: 250px; min-width: 200px; max-height: 500px"><br>
+			<div class="col-lg-5 col-lg-push-1 profile_table" style="overflow: hidden; border-radius: 4px; border: 2px solid black; margin-top: 40px; background-color: #00A2B5; color: white; height: 250px; min-width: 200px; max-height: 500px; box-shadow: 5px 5px 10px #000;"><br>
 				<div class="col-lg-12" style="color: white; display: block;">
 					<ul style="list-style: none; font-size: 1.3em;"><h2><b><u>Profile Details</u></b></h2>
 						<li class="jusitfied">

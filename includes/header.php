@@ -59,16 +59,17 @@ include_once 'database/sqli.php';
         </li>
         <li><a href="about_us.php">About Us</a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><button type="button" class="btn btn-default" style="margin-bottom: 5px; margin-top: 7px; margin-right: 15px;" id="signup-button"><a href="#login-box"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li></button>
-        <li><button type="button" class="btn btn-default" style="margin-bottom: 5px; margin-top: 7px; margin-right: 15px;"  id="login-button"><a href="#login-box"><span class="glyphicon glyphicon-log-in"></span> Login</a></li></button>
+      <ul class="nav navbar-nav navbar-right" style="padding-left: 15px;">
+        <li><button type="button" class="btn btn-info" style="margin-bottom: 5px; margin-top: 7px; margin-right: 15px; background-color: black;  width: 100px;" id="signup-button"><a href="#login-box"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li></button>
+        <li><button type="button" class="btn btn-info" style="margin-bottom: 5px; margin-top: 7px; margin-right: 15px; background-color: black; width: 100px;"  id="login-button"><a href="#login-box" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li></button>
       </ul>
     </div>
   </nav>
   <hr style="margin:0">
   <div style="margin: 0px;">
   
-<!-- <div class="container">
-  <h3>Right Aligned Navbar</h3>
-  <p>The .navbar-right class is used to right-align navigation bar buttons.</p>
-</div> -->
+  <style type="text/css">
+    #signup-button:hover {
+      background-color: white;
+    }
+  </style>
