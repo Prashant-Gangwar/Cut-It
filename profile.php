@@ -5,13 +5,9 @@ $users = qSelectObject('users',"user_id, name, email, mobile, password, active, 
 $user_urls = qSelectObject('user_urls',"id, url, short_url, message, clicks, active, created_on",array('user_id'=>$user_id));
 $user_qrs = qSelectObject('user_qrs',"id, url, short_url, message, scanned, active, created_on",array('user_id'=>$user_id));
 //print_r($_SESSION);
-unset($_SESSION['url_id'])
 ?>
 
-
-
 <style type="text/css">
-
 
 #profile_table{
     font-size: 130%;
@@ -63,7 +59,7 @@ table tr:nth-child(odd):hover{
 			<div class="modal-body">
 
 				<div class="row">
-					<h1 class="main-heading" style="text-decoration: underline">Edit URL details</h1>
+					<h1 class="main-heading" style="text-decoration: underline" id="modal-heading">Edit URL details</h1>
 				</div>
 
 				<div class="vertical-space-30"></div>
@@ -99,7 +95,7 @@ table tr:nth-child(odd):hover{
 						</div>
 
 						<div class="form-group">
-							<label class="col-sm-3 control-label">Total Clicks</label>
+							<label class="col-sm-3 control-label" id="total-clicks-scans">Total Clicks</label>
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="url-modal-clicks" name="url-modal-clicks" placeholder="Total Clicks" disabled>
 							</div>
@@ -130,6 +126,9 @@ table tr:nth-child(odd):hover{
 								<button type="submit" onClick="javascript:void(0);" name="url_update" id="url_update" class="btn btn-default login">
 									Update
 								</button>
+								<button type="submit" onClick="javascript:void(0);" name="qr_update" id="qr_update" class="btn btn-default login">
+									Update
+								</button>
 							</div>
 						</div>
 					</form>
@@ -158,7 +157,8 @@ table tr:nth-child(odd):hover{
 				</div>
 
 					<form class="form-horizontal" id="url-modal-form" method="post" action="database/db_v2">
-<br>						<div class="form-group text-center">
+					<br>
+						<div class="form-group text-center">
 							<label class="col-sm-12 text-center">Are you sure you want to delete this link?</label>
 						</div>
 
@@ -252,7 +252,7 @@ table tr:nth-child(odd):hover{
 		<div id="url_tab" style="overflow: auto; ">
 	  		<h3 style="margin: 0px; font-family: 'Montserratbold'">URL History</h3>
 			  <p>You can change "message/comment" or delete Short URL generated.</p>
-			  	<table class="table table-striped text-center" style="border: 3px solid black; overflow: auto; margin: 0">
+			  	<table class="table table-striped text-center" id="url_table" style="border: 3px solid black; overflow: auto; margin: 0">
 			    	<thead>
 				      	<tr style="font-family: 'Montserratbold'">
 					        <th class="text-left" style="min-width: 20px; max-width: 100px;">S.No.</th>
@@ -268,18 +268,17 @@ table tr:nth-child(odd):hover{
 			    	</thead>
 			  		<tbody>
 					    <?php 
-					      		$res_url = qSelect("urls", "id, short_url, message, created_date, clicks, active");
+					      		$res_url = qSelect("user_urls", "id, short_url, message, created_on, clicks, active");
 					      	$i=0;
 					    	while($row_url = $res_url->fetch_assoc()) 
 					      	{ 	
 					      		$i++;
-					      		
                 			    echo "<tr>";
 							    	echo "<td class='text-left' style='padding-left:20px'>" . $i . "</td>";
 							    	echo "<td class='text-left' hidden>" . $row_url['id'] . "</td>";
-							        echo "<td class='text-left'><b><a href='http://www.cut-it.net23.net/prashant/{$row_url['short_url']}' >cut.netnet.net/" . $row_url['short_url'] . "<a></b></td>";
+							        echo "<td class='text-left'><b><a href='http://www.cut-it.netne.net/prashant/{$row_url['short_url']}' >cut.netnet.net/" . $row_url['short_url'] . "<a></b></td>";
 							        echo "<td class='text-left'>" . $row_url['message'] . "</td>";
-							        echo "<td class='text-left'>" . date("d-m-Y", strtotime($row_url['created_date'])); "</td>";
+							        echo "<td class='text-left'>" . date("d-m-Y", strtotime($row_url['created_on'])); "</td>";
 							        echo "<td>" . $row_url['clicks'] . "</td>";
 							        echo "<td>"; if ($row_url['active'] ==1){ echo "Active"; } else { echo "Not Active"; } "</td>";
 							        echo "<td><center><i class='fa fa-2x fa-pencil-square-o url_edit' aria-hidden='true' style='color:green' data-toggle='modal' data-target='#url-modal'></i></center></td>";
@@ -297,11 +296,12 @@ table tr:nth-child(odd):hover{
 		<div id="qr_tab" style="overflow: auto; ">
 		  	<h3 style="margin: 0px; font-family: 'Montserratbold'">QR Code History</h3>
 		  	<p>You can change "message/comment" related to QR code or delete QR Code generated.</p>
-		 		<table class="table table-striped text-center" style="border: 3px solid black; overflow: auto; margin:0">
+		 		<table class="table table-striped text-center" id="qr_table" style="border: 3px solid black; overflow: auto; margin:0">
 			    	<thead>
 				      	<tr style="font-family: 'Montserratbold'">
 					        <th class="text-left" style="min-width: 20px; max-width: 100px;">S.No.</th>
 					        <th class="text-left" style="min-width: 20px; max-width: 100px;" hidden>id</th>
+					        <th class="text-left" style="min-width: 20px; max-width: 100px;" hidden>short_url</th>
 					        <th class="text-left" style="min-width: 120px;">QR Code</th>
 			   		        <th class="text-left" style="min-width: 200px; ">Message / Comment</th>
 					        <th class="text-left" style="min-width: 105px; max-width: 120px;">Created On</th>
@@ -322,6 +322,7 @@ table tr:nth-child(odd):hover{
                 			    echo "<tr>";
 							    	echo "<td class='text-left' style='padding-left:20px'>" . $i . "</td>";
 							    	echo "<td class='text-left' style='padding-left:20px' hidden>" . $row_qr['id'] . "</td>";
+							    	echo "<td hidden>cut.netne.net/" . $row_qr['short_url'] . "</td>";
 							        echo "<td class='text-left'>" . "<img src='includes/qr_img/php/qr_img.php?d=http://www.cut-it.net23.net/{$row_qr['short_url']}' width=\"100%\" height=\"100%\" alt=\"QR Code Image\" style=\" border: 2px solid orange; max-height: 100px; max-width: 100px;\">" . "</td>";
 							        echo "<td class='text-left'>" . $row_qr['message'] . "</td>";
 							        echo "<td class='text-left'>" . date("d-m-Y", strtotime($row_qr['created_on'])); "</td>";
@@ -397,6 +398,11 @@ $(function(){
 	//To Edit url rows
 	$('.url_edit').on('click', function (e) {
 
+		$("#modal-heading").text('Edit URL Details');
+		$("#total-clicks-scans").text('Total Clicks');
+		$("#qr_update").hide();
+		$("#url_update").show();
+
 		var id = $(this).closest('tr').find('td:eq(1)').text();
 		var short_url = $(this).closest('tr').find('td:eq(2)').text();
 		var msg = $(this).closest('tr').find('td:eq(3)').text();
@@ -404,7 +410,7 @@ $(function(){
 		var clicks = $(this).closest('tr').find('td:eq(5)').text();
 		var status = $(this).closest('tr').find('td:eq(6)').text();
 
-		//alert(status);
+		//alert(short_url);
 
        	document.getElementById('url-modal-id').value = id;
        	document.getElementById('url-modal-short-url').value = short_url;
@@ -424,11 +430,12 @@ $(function(){
 		$.ajax({
 			type: "POST",
 			url: 'edit_delete.php',
-			data: {	"id": id, 'table_type': "url", "msg": msg, "status": status	},
+			data: {	"id": id, 'table_type': "url", "msg": msg, "status": status, 'option': 'edit'	},
 			
 			success: function(response){
-
-				console.log(response);
+					//console.log(response);
+					$("#url-modal").modal('toggle');
+					window.location.reload();
 			}
 		});
 		event.preventDefault();
@@ -442,57 +449,68 @@ $(function(){
 
 		var id = $(this).closest('tr').find('td:eq(1)').text();
 		alert(id);
-//		edit_delete("url_delete",id);
 
 	});
-	
 
-	//To edit qr rows
+	//TO edit QR CODE rows
 	$('.qr_edit').on('click', function (e) {
+
+		$("#modal-heading").text('Edit QR Code Details');
+		$("#total-clicks-scans").text("Total Scans");
+		$("#url_update").hide();
+		$("#qr_update").show();
 
 		var id = $(this).closest('tr').find('td:eq(1)').text();
 		var short_url = $(this).closest('tr').find('td:eq(2)').text();
-		var msg = $(this).closest('tr').find('td:eq(3)').text();
-		var created_on = $(this).closest('tr').find('td:eq(4)').text();
-		var clicks = $(this).closest('tr').find('td:eq(5)').text();
-		var status = $(this).closest('tr').find('td:eq(6)').text();
+		var msg = $(this).closest('tr').find('td:eq(4)').text();
+		var created_on = $(this).closest('tr').find('td:eq(5)').text();
+		var clicks = $(this).closest('tr').find('td:eq(6)').text();
+		var status = $(this).closest('tr').find('td:eq(7)').text();
 
-		alert(id);
+		//alert(short_url);
 
-       	document.getElementById('qr-modal-id').value = id;
-       	document.getElementById('qr-modal-short-url').value = short_url;
-       	document.getElementById('qr-modal-message').value = msg;
-       	document.getElementById('qr-modal-created-on').value = created_on;
-       	document.getElementById('qr-modal-clicks').value = clicks;
-       	document.getElementById('qr-modal-status').value = status;
+       	document.getElementById('url-modal-id').value = id;
+       	document.getElementById('url-modal-short-url').value = short_url;
+       	document.getElementById('url-modal-message').value = msg;
+       	document.getElementById('url-modal-created-on').value = created_on;
+       	document.getElementById('url-modal-clicks').value = clicks;
+       	$('#url-modal-status').html(status);
+       	$("#url-modal").modal('toggle');
 
 	});
 
+	$('#qr_update').on('click', function (e) {
+
+	var id = document.getElementById("url-modal-id").value;
+	var msg = document.getElementById("url-modal-message").value;
+	var status = $("#url-modal-status").html();
+
+		$.ajax({
+			type: "POST",
+			url: 'edit_delete.php',
+			data: {	"id": id, 'table_type': "qr", "msg": msg, "status": status, 'option': 'edit'	},
+			
+			success: function(response){
+					//console.log(response);
+					$("#url-modal").modal('toggle');
+					window.location.reload();
+			}
+		});
+		event.preventDefault();
+		return false;
 	
+	});
+
+
 	//To delete qr rows
 	$('.qr_delete').on('click', function (e) {
 
 		var id = $(this).closest('tr').find('td:eq(1)').text();
-		alert(id);
+		//alert(id);
 
-//		edit_delete("qr_delete",id);
 	});
-
 
 });
 
-/*function edit_delete(toclass, id)
-{
-		$.ajax({
-			type: "POST",
-		    url: 'edit_delete.php',
-			data: {	'class': toclass, 'id': id	},
-			success: function(response){
-					
-					alert(response);
-			}
-		});
-		return;
-}*/
 
 </script>

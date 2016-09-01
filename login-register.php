@@ -238,7 +238,7 @@
 		
 		//Login Form Post via AJAX
 		var loginForm = $("#login-form");
-		console.log(loginForm);
+		//console.log(loginForm);
 		$(loginForm).ajaxForm({
 
 			url : "database/login_register.php",
