@@ -1,3 +1,5 @@
+
+
 <?php include_once 'includes/header.php'; 
 $_SESSION["user_id"] = 1;
 $user_id = $_SESSION["user_id"];
@@ -52,8 +54,6 @@ table tr:nth-child(odd):hover{
 }
 
 </style>
-
-
 
 
 <!-- Edit Details Box -->
@@ -192,6 +192,38 @@ table tr:nth-child(odd):hover{
 </div>
 
 
+<!-- Pic Profile Pic Uploader Modal -->
+<div class="modal fade" id="pic-uploader-modal" role="dialog">
+	<div class="modal-dialog" style="border-radius: 10px;border: 4px solid #00A2B5;">
+		<div class="modal-content" style="text-align: center;color:#337ab7;">
+			<div class="modal-body">
+
+				<div class="row">
+					<h1 class="main-heading" style="text-decoration: underline">Upload Profile Pic</h1>
+				</div>
+
+				<div class="container">
+	        	<form role="form" action="upload_image.php" method="post" enctype="multipart/form-data" id="upload_pic_form" >
+		          	<br>
+	          		<label class="form-group pull-left">Select image to upload: </label>
+		          	<div class="form-group pull-left" >
+			         	<input type="file"  name="fileToUpload" id="fileToUpload" class="pull-left"><br>
+		          		<input class="btn btn-success pull-left" type="submit" value="Upload Pic" name="submit" id="upload_pic_button" onclick="javascript:void(0);" style="margin-top: 10px;"> 
+		        	</div>
+		        	<br><br>
+		      	</form>
+		      	</div>
+				
+				<div class="modal-footer" style="border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;">
+					<button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal">
+						<i class="fa fa-times" aria-hidden="true" style="font-size: 20px; padding-right: 3px;"></i> Close
+					</button>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
 
 
 
@@ -202,24 +234,18 @@ table tr:nth-child(odd):hover{
 			<h1 style="background-color: #C70D0D; color: white; padding-top: 5px; padding-bottom: 5px; font-weight: bold;  margin-bottom: 10px; border-radius: 4px;" > Hi Prashant! Welcome to CUT IT :)
 			</h1>
 		</div>
-		<div class="col-lg-12" style="background-color: #000001; color: white; border-radius: 4px; background-image: url(images/batman.jpg); height: 100%; width: 100%;">
+		<div class="col-lg-12" style="background-color: #fff; color: white; border-radius: 4px; background-image: url(images/batman.jpg); opacity: 0.9; height: 100%; width: 100%;">
 			<div class="col-lg-push-2 col-lg-4 text-center" id="profile" >
 				<br><br>
 					<div class="text-left">
-			       		<img src="uploads/<?php $dp = qSelectObject('users', 'dp_name', array('user_id'=>$_SESSION['user_id'])); if($dp->dp_name) echo $dp->dp_name; else echo "Please Upload your image"?>" width="200" height="200" class="img-rounded" alt="Upload your Profile Pic" style="border: 2px solid black; margin:0; background-color: black; box-shadow: 5px 5px 10px #000; ">
+			       		<img src="uploads/<?php $dp = qSelectObject('users', 'dp_name', array('user_id'=>$_SESSION['user_id'])); if($dp->dp_name) echo $dp->dp_name; else echo "Please Upload your image"?>" width="200" height="200" class="img-rounded" alt="Upload your Profile Pic" style="border: 2px solid black; margin:0; background-color: black; box-shadow: 0px 0px 30px #000; ">
 			      	</div>
-			      	<div class="form-group text-left" style="margin-bottom: 40px;">
-				      	<button type="button" class="btn btn-warning text-left" style="margin-top: 10px; " id="change_pic">Change Profile Pic</button>
-				      	<form role="form" action="upload_image.php" method="post" enctype="multipart/form-data" id="upload_pic_form" style="margin-top: 20px; padding-left: 10px; background-color: #5bc0de; border-radius: 3px;">
-				          	<label class="form-group text-left">Select image to upload:</label>
-				          	<div class="form-group" style="padding-bottom: 10px;">
-					          	<input type="file" name="fileToUpload" id="fileToUpload" style="margin-bottom: 3px;">
-				          		<input class="btn btn-success text-center" type="submit" value="Upload Pic" name="submit" id="upload_pic_button" onclick="javascript:void(0);"> 
-				        	</div>
-				      	</form>
+			      	<div class="form-group text-left" style="margin-bottom: 40px; margin-left: 20px;">
+
+			      		<button type="button" class="btn btn-warning text-left" style="margin-top: 10px; " id="change_pic" data-toggle="modal" data-target='#pic-uploader-modal'>Change Profile Pic</button>
 				    </div>
 			</div>
-			<div class="col-lg-5 col-lg-push-1 profile_table" style="overflow: hidden; border-radius: 4px; border: 2px solid black; margin-top: 40px; background-color: #00A2B5; color: white; height: 250px; min-width: 200px; max-height: 500px; box-shadow: 5px 5px 10px #000;"><br>
+			<div class="col-lg-5 col-lg-push-1 profile_table" style="overflow: hidden; border-radius: 4px; border: 2px solid black; margin-top: 40px; background-color: #00A2B5; color: white; height: 250px; min-width: 200px; max-height: 500px; box-shadow: 0px 0px 30px #000;"><br>
 				<div class="col-lg-12" style="color: white; display: block;">
 					<ul style="list-style: none; font-size: 1.3em;"><h2><b><u>Profile Details</u></b></h2>
 						<li class="jusitfied">
@@ -349,10 +375,14 @@ table tr:nth-child(odd):hover{
 
 
 <script type="text/javascript">
+
 	
 $(function(){
 
+  	$("#qr_tab").hide();
+
 	$("#upload_pic_form").hide();
+
 	//to show change pic uploader
 	$("#change_pic").click(function(){
 
@@ -395,7 +425,7 @@ $(function(){
 				data: {	'url': url	},
 				success: function(response){
 						
-						alert(response);
+						//alert(response);
 						$("#profile").load();
 				}
 		});
@@ -469,7 +499,7 @@ $(function(){
 
 
 		var id = $(this).closest('tr').find('td:eq(1)').text();
-		alert(id);
+		//alert(id);
 
 		$("#delete").on('click', function(e){
 
@@ -549,7 +579,7 @@ $(function(){
 	$('.qr_delete').on('click', function (e) {
 		
 		var id = $(this).closest('tr').find('td:eq(1)').text();
-		alert(id);
+		//alert(id);
 
 		$("#delete").on('click', function(e){
 
