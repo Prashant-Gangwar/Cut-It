@@ -4,16 +4,18 @@ include_once 'database/db_connection.php';
 include_once 'database/sqli.php';
 session_start();
 
-print_r($_POST);
+//print_r($_POST);
 $class = $_POST['table_type'];
-$msg = $_POST['msg'];
-$status = $_POST['status'];
-$id = $_POST['id'];
 $user_id = $_SESSION["user_id"];
 $option = $_POST['option'];
+$id = $_POST['id'];
 
 if($option == "edit")
 {
+
+	$status = $_POST['status'];
+	$msg = $_POST['msg'];
+
 	if($status == "Active")
 	{
 		$status = 1;
@@ -35,8 +37,17 @@ if($option == "edit")
 		//echo $success;
 	}	
 }
-else
+else if($option == "delete")
 {
+	if($class == "url")
+	{
+		$success = qExecute("DELETE FROM user_urls WHERE id = '$id' AND user_id = '$user_id'");
+	echo "deleted";
+	}
+	else
+	{
+		$success = qExecute("DELETE FROM user_qrs WHERE id = '$id' AND user_id = '$user_id'");
+	}
 
 }
 

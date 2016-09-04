@@ -86,17 +86,7 @@
     <hr style="margin: 0"><br>
         <div class="container-fluid" style="margin:0">
             
-               <!--  <a href="#login-box" id="login-button">
-                    <button type="button" class="btn-lg btn-primary col-lg-push-2 col-lg-4 col-md-6 col-sm-12 col-xm-12">Sign In</button>
-                </a>
-                <a href="#login-box" id="signup-button">
-                    <button type="button" class="btn-lg btn-success col-lg-push-2 col-lg-4 col-md-6 col-sm-6 col-xm-12">Sign Up</button>
-                </a>
-            </div>
-            <div class="text-center" >
-                <a href="#"><button type="button" class="btn-lg btn-danger col-lg-push-2 col-lg-8 col-sm-12 col-md-12 col-xm-12"> Continue without Sign Up/Sign In </button></a>
-            </div>
--->            <div class="form-horizontal">
+            <div class="form-horizontal">
                     <form class="form-horizontal" >
 
                         <div class="form-group" >

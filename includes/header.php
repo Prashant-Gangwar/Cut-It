@@ -13,20 +13,26 @@ include_once 'database/sqli.php';
   <title>CUT-IT</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-   --><link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css">
+  
+  <!-- <link rel="stylesheet" href="../bootstrap/dist/css/bootstrap.min.css">
   <script src="js/jquery-2.2.4.min.js"></script>
   <script src="../../bootstrap/dist/js/bootstrap.min.js"></script>
-  <link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
+   --><link rel="stylesheet" href="css/font-awesome/css/font-awesome.min.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
   <link rel="stylesheet" type="text/css" href="css/fonts.css">
   <link rel="icon" type="image/png" href="images/favicon.png" />
 <!--   <link rel="stylesheet" href="assets/fonts/ionicons/css/ionicons.min.css" media="screen" charset="utf-8">
  -->
-  <script src="js/view_source_code_disable.js"></script>
-  <script src="js/sheetValidator.js" ></script>
+  <!-- <script src="js/view_source_code_disable.js"></script>
+   -->
+   <script src="js/sheetValidator.js" ></script>
   <!-- <script type="text/javascript" src="assets/js/jquery.js"></script>
   <script type="text/javascript" src="assets/js/jquery.form.min.js"></script>
   <script type="text/javascript" src="assets/js/jquery.maskedinput.min.js"></script>

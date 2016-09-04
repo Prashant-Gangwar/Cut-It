@@ -160,7 +160,7 @@ table tr:nth-child(odd):hover{
 					<h1 class="main-heading" style="text-decoration: underline">Delete Short Link</h1>
 				</div>
 
-					<form class="form-horizontal" id="url-modal-form" method="post" action="database/db_v2">
+					<form class="form-horizontal" id="url-modal-form" method="post" action="edit_delete.php">
 					<br>
 						<div class="form-group text-center">
 							<label class="col-sm-12 text-center">Are you sure you want to delete this link?</label>
@@ -168,12 +168,12 @@ table tr:nth-child(odd):hover{
 
 						<div class="form-group">
 							<div class="col-sm-6">
-								<button type="submit" onClick="javascript:void(0);" name="url-delete-yes" class="btn btn-default">
+								<button type="submit" onClick="javascript:void(0);" name="url-delete-yes" id="delete" class="btn btn-success">
 									Yes
 								</button>
 							</div>
 							<div class="col-sm-6">
-								<button type="submit" onClick="javascript:void(0);" name="url-delete-no" class="btn btn-default">
+								<button type="submit" onClick="javascript:void(0);" name="url-delete-no" id="nodelete" class="btn btn-danger">
 									No
 								</button>
 							</div>
@@ -209,13 +209,13 @@ table tr:nth-child(odd):hover{
 			       		<img src="uploads/<?php $dp = qSelectObject('users', 'dp_name', array('user_id'=>$_SESSION['user_id'])); if($dp->dp_name) echo $dp->dp_name; else echo "Please Upload your image"?>" width="200" height="200" class="img-rounded" alt="Upload your Profile Pic" style="border: 2px solid black; margin:0; background-color: black; box-shadow: 5px 5px 10px #000; ">
 			      	</div>
 			      	<div class="form-group text-left" style="margin-bottom: 40px;">
-				      	<form role="form" action="upload_image.php" method="post" enctype="multipart/form-data" id="upload_pic_form">
+				      	<button type="button" class="btn btn-warning text-left" style="margin-top: 10px; " id="change_pic">Change Profile Pic</button>
+				      	<form role="form" action="upload_image.php" method="post" enctype="multipart/form-data" id="upload_pic_form" style="margin-top: 20px; padding-left: 10px; background-color: #5bc0de; border-radius: 3px;">
 				          	<label class="form-group text-left">Select image to upload:</label>
-				          	<div class="form-group">
+				          	<div class="form-group" style="padding-bottom: 10px;">
 					          	<input type="file" name="fileToUpload" id="fileToUpload" style="margin-bottom: 3px;">
-				          		<input class="btn-lg btn-success text-center" type="submit" value="Upload Pic" name="submit" id="upload_pic_button" onclick="javascript:void(0);"> 
+				          		<input class="btn btn-success text-center" type="submit" value="Upload Pic" name="submit" id="upload_pic_button" onclick="javascript:void(0);"> 
 				        	</div>
-				        	<br>
 				      	</form>
 				    </div>
 			</div>
@@ -277,14 +277,14 @@ table tr:nth-child(odd):hover{
 					    	while($row_url = $res_url->fetch_assoc()) 
 					      	{ 	
 					      		$i++;
-                			    echo "<tr>";
+                			    echo "<tr id='url_" .$row_url['id'] . "'>";
 							    	echo "<td class='text-left' style='padding-left:20px'>" . $i . "</td>";
 							    	echo "<td class='text-left' hidden>" . $row_url['id'] . "</td>";
 							        echo "<td class='text-left'><b><a href='http://www.cut-it.netne.net/prashant/{$row_url['short_url']}' >cut.netnet.net/" . $row_url['short_url'] . "<a></b></td>";
-							        echo "<td class='text-left'>" . $row_url['message'] . "</td>";
+							        echo "<td class='text-left' id='url_msg_" . $row_url['id'] . "'>" . $row_url['message'] . "</td>";
 							        echo "<td class='text-left'>" . date("d-m-Y", strtotime($row_url['created_on'])); "</td>";
 							        echo "<td>" . $row_url['clicks'] . "</td>";
-							        echo "<td>"; if ($row_url['active'] ==1){ echo "Active"; } else { echo "Not Active"; } "</td>";
+							        echo "<td id='url_status_" . $row_url['id'] . "'>"; if ($row_url['active'] ==1){ echo "Active"; } else { echo "Not Active"; } "</td>";
 							        echo "<td><center><i class='fa fa-2x fa-pencil-square-o url_edit' aria-hidden='true' style='color:green' data-toggle='modal' data-target='#url-modal'></i></center></td>";
 							        echo "<td><i class='fa fa-lg fa-2x fa-trash-o url_delete' aria-hidden='true' style='color: red' data-toggle='modal' data-target='#url-delete-modal'></i></td>";
 							    echo "</tr>";
@@ -323,17 +323,17 @@ table tr:nth-child(odd):hover{
 					      	{ 	
 					      		$i++;
 					      		
-                			    echo "<tr>";
+                			    echo "<tr id='qr_".$row_qr['id']."'>";
 							    	echo "<td class='text-left' style='padding-left:20px'>" . $i . "</td>";
 							    	echo "<td class='text-left' style='padding-left:20px' hidden>" . $row_qr['id'] . "</td>";
 							    	echo "<td hidden>cut.netne.net/" . $row_qr['short_url'] . "</td>";
 							        echo "<td class='text-left'>" . "<img src='includes/qr_img/php/qr_img.php?d=http://www.cut-it.net23.net/{$row_qr['short_url']}' width=\"100%\" height=\"100%\" alt=\"QR Code Image\" style=\" border: 2px solid orange; max-height: 100px; max-width: 100px;\">" . "</td>";
-							        echo "<td class='text-left'>" . $row_qr['message'] . "</td>";
+							        echo "<td class='text-left' id='qr_msg_" . $row_qr['id'] . "'>" . $row_qr['message'] . "</td>";
 							        echo "<td class='text-left'>" . date("d-m-Y", strtotime($row_qr['created_on'])); "</td>";
 							        echo "<td>" . $row_qr['scanned'] . "</td>";
-							        echo "<td>"; if ($row_qr['active'] ==1){ echo "Active"; } else { echo "Not Active"; } "</td>";
+							        echo "<td id='qr_status_" . $row_qr['id'] . "'>"; if ($row_qr['active'] ==1){ echo "Active"; } else { echo "Not Active"; } "</td>";
 							        echo "<td><center><i class='fa fa-2x fa-pencil-square-o qr_edit' aria-hidden='true' style='color:green' id='qr_edit_{$row_qr['id']}' ></i></center></td>";
-							        echo "<td><i class='fa fa-2x fa-trash-o qr_delete' aria-hidden='true' style='color: red' id='qr_delete_{$row_qr['id']}'></i></td>";
+							        echo "<td><i class='fa fa-lg fa-2x fa-trash-o qr_delete' aria-hidden='true' style='color: red' data-toggle='modal' data-target='#url-delete-modal'></i></td>";
 							    echo "</tr>";
 					  		}
 					    ?>
@@ -351,6 +351,13 @@ table tr:nth-child(odd):hover{
 <script type="text/javascript">
 	
 $(function(){
+
+	$("#upload_pic_form").hide();
+	//to show change pic uploader
+	$("#change_pic").click(function(){
+
+		$("#upload_pic_form").slideDown();
+	});
 
    // jQuery methods go here...
    	$("#url_tab_click").click(function(){
@@ -370,6 +377,14 @@ $(function(){
     	
 	});
 
+	$("#nodelete").on('click', function(e){
+
+			$("#url-delete-modal").modal('toggle');
+			event.preventDefault();
+			return false;
+		});	
+		
+
 	//TO upload the Profile Pic using AJAX
 	$("#upload_pic_form").bind('submit', function (e){
 			
@@ -381,7 +396,7 @@ $(function(){
 				success: function(response){
 						
 						alert(response);
-						$("#profile").reload();
+						$("#profile").load();
 				}
 		});
 		event.preventDefault();
@@ -439,7 +454,9 @@ $(function(){
 			success: function(response){
 					//console.log(response);
 					$("#url-modal").modal('toggle');
-					window.location.reload();
+					$("#url_msg_"+id).html(msg);
+					$("#url_status_"+id).html(status);
+
 			}
 		});
 		event.preventDefault();
@@ -454,6 +471,25 @@ $(function(){
 		var id = $(this).closest('tr').find('td:eq(1)').text();
 		alert(id);
 
+		$("#delete").on('click', function(e){
+
+			$.ajax({
+				type: "POST",
+				url: 'edit_delete.php',
+				data: {	"id": id, "table_type": "url", "option": "delete"	},
+				
+				success: function(response){
+						console.log(response);
+						$("#url_"+id).hide();
+						$("#url-delete-modal").modal('toggle');
+
+				}
+
+			});
+			event.preventDefault();
+			return false;
+		});	
+		
 	});
 
 	//TO edit QR CODE rows
@@ -497,7 +533,10 @@ $(function(){
 			success: function(response){
 					//console.log(response);
 					$("#url-modal").modal('toggle');
-					window.location.reload();
+					$("#qr_msg_"+id).html(msg);
+					$("#qr_status_"+id).html(status);
+
+					//window.location.reload();
 			}
 		});
 		event.preventDefault();
@@ -508,10 +547,28 @@ $(function(){
 
 	//To delete qr rows
 	$('.qr_delete').on('click', function (e) {
-
+		
 		var id = $(this).closest('tr').find('td:eq(1)').text();
-		//alert(id);
+		alert(id);
 
+		$("#delete").on('click', function(e){
+
+			$.ajax({
+				type: "POST",
+				url: 'edit_delete.php',
+				data: {	"id": id, "table_type": "qr", "option": "delete"	},
+				
+				success: function(response){
+						console.log(response);
+						$("#qr_"+id).hide();
+						$("#url-delete-modal").modal('toggle');
+
+				}
+
+			});
+			event.preventDefault();
+			return false;
+		});
 	});
 
 });
