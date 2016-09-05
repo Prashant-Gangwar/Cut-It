@@ -44,20 +44,42 @@ include_once 'database/sqli.php';
   <?php require 'login-register.php' ?>
 
 </head>
+<style>
+#title: hover{
+  color: #337ab7 !important;
+}
+#t1,#t2{
+  color: orange;
+}
+#t1: hover{
+  color: red;
+}
 
-<body>
-<div class="row menu-button-div" style="margin: 10px;" id="menu-button-div">
-  <button type="button" id=" menu-button" class="btn btn-warning col-lg-12 col-sm-12 col-xs-12 col-md-12">
-    <h2 style="margin:0; font-family: 'Montserratbold'; "><b>Menu</b></h2>
-  </button>
+</style>
+<body style="font-family: 'Montserrat'">
+<div class="row menu-button-div justify" style="margin: 10px;" id="menu-button-div">
+  <div >
+    <a href="index.php">
+    <span class="fa-stack fa-2x">
+      <i class="fa fa-square fa-stack-2x"></i>
+      <i class="fa fa-scissors fa-stack-1x fa-inverse"></i>
+    </span>
+    <span style="font-family: 'Montserratbold'; font-size: 22px; color: #00A2B5" id="title">
+      <b>CUT IT: <span id="t1">URL Shortener </span>& <span id="t2">QR CODE Generator</span></b>
+    </span>
+    </a>
+  </div>
+  <div id="menu-btn-div">
+    <button type="button" id="menu-button" class="btn btn-warning btn-lg col-lg-12 col-sm-12 col-xs-12 col-md-12">
+      <h3 style="margin:0; font-family:'Montserratbold';"><b><span class="pull-left"></span> Menu <span class="pull-right"><i class="fa fa-bars" aria-hidden="true"></i></span></b></h3>
+    </button>
+  </div>
 </div>
+
 <hr style="margin:0">
 
 <nav class="navbar navbar-inverse menu-div" style="margin: 0px; background-color: #000000;  border-radius: 0px; font-family: 'Montserratbold'" id="menu-div">
   <div class="container-fluid" >
-    <div class="navbar-header">
-      <a class="navbar-brand" href="index.php"><b>CUT IT</b></a>
-    </div>
     <ul class="nav navbar-nav">
       <li class="active"><a href="index.php">Home</a></li>
       <li class=""><a href="url_shortener.php">URL Shortener</a></li>
@@ -69,31 +91,24 @@ include_once 'database/sqli.php';
           <li class=""><a href="sign_out.php">Sign Out</a></li>
         </ul>
       </li>
-      <li><a href="about_us.php">About Us</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right" style="padding-left: 15px;">
-      <li><button type="button" class="btn btn-info" style="margin-bottom: 5px; margin-top: 7px; margin-right: 15px; background-color: black;  width: 100px;" id="signup-button"><a href="#login-box"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li></button>
-      <li><button type="button" class="btn btn-info" style="margin-bottom: 5px; margin-top: 7px; margin-right: 15px; background-color: black; width: 100px;"  id="login-button"><a href="#login-box" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li></button>
+      <li><button type="button" class="btn btn-info" style="margin-bottom: 5px; margin-top: 7px; margin-right: 15px; background-color: black;  width: 100px;" id="signup-button"><a href="#login-box"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></button></li>
+      <li><button type="button" class="btn btn-info" style="margin-bottom: 5px; margin-top: 7px; margin-right: 15px; background-color: black; width: 100px;"  id="login-button"><a href="#login-box" ><span class="glyphicon glyphicon-log-in"></span> Login</a></button></li>
     </ul>
   </div>
 </nav>
 <hr style="margin:0">
 <div style="margin: 0px;">
 
-<style type="text/css">
-  #signup-button:hover {
-    background-color: white;
-  }
-</style>
 <script type="text/javascript">
 
-$("#menu-div").hide();
 $("#menu-div").removeClass('menu-div');
 
 $(document).ready(function(){
 
 
-    $("#menu-button-div").click(function(e){
+    $("#menu-button").click(function(e){
     if($("#menu-div").hasClass('menu-div'))
     {
       $("#menu-div").slideUp('fast'); 

@@ -1,7 +1,7 @@
 <?php include_once  'includes/header.php'; ?>
 
 <div class="container-fluid" style="font-family: 'Montserrat'" >
- 	<img src="images/url-shortener-cover-pic.jpg" width="100%" height="100%" class="img-rounded" alt="QR Code Image" style="max-height:400px; border: 2px solid black;">
+ 	<img src="images/batman.jpg" width="100%" height="100%" class="img-rounded" alt="QR Code Image" style="max-height:500px; border: 2px solid black;">
 	<hr style="margin: 0;">
 
 	&nbsp; &nbsp; <br><br><br>
@@ -18,7 +18,7 @@
 			    </center>
 			    <center>
 			    	<div>
-			    		<input  class="form-control input-lg" id="url_message" name="url_message" <?php if(isset($_SESSION["user_id"])) {} else { echo "hidden" ;}?> style="width:100%; max-width: 900px;  color: #00A2B5; border: 1px solid red; margin:0px; margin-top: 20px;" placeholder="Enter Your Message/Comment about URL here ... " autocomplete="off"  <?php if(isset($_SESSION["user_id"])) { echo "required" ; }?>>
+			    		<input  class="form-control input-lg" id="url_message" type="text" name="url_message" <?php if(isset($_SESSION["user_id"])) {} else { echo "hidden" ;}?> style="width:100%; max-width: 900px;  color: #00A2B5; border: 1px solid red; margin:0px; margin-top: 20px;" placeholder="Enter Your Message/Comment about URL here ... " autocomplete="off"  <?php if(isset($_SESSION["user_id"])) { echo "required" ; }?>>
 			    	</div> 
 			    </center>
 			    <center>
