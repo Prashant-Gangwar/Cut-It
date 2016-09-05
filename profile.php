@@ -247,9 +247,9 @@ table tr:nth-child(odd):hover{
 			</div>
 			<div class="col-lg-5 col-lg-push-1 profile_table" style="overflow: hidden; border-radius: 4px; border: 2px solid black; margin-top: 40px; background-color: #00A2B5; color: white; height: 250px; min-width: 200px; max-height: 500px; box-shadow: 0px 0px 30px #000;"><br>
 				<div class="col-lg-12" style="color: white; display: block;">
-					<ul style="list-style: none; font-size: 1.3em;"><h2><b><u>Profile Details</u></b></h2>
+					<ul style="list-style: none;"><h2><b><u>Profile Details</u></b></h2>
 						<li class="jusitfied">
-							Name : <?php echo $users->name; ?>
+							Name : <?php echo $users->name; ?> 
 						</li>
 						<li class="justified">
 							Email id : <?php echo $users->email; ?>

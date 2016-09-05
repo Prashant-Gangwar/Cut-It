@@ -46,36 +46,67 @@ include_once 'database/sqli.php';
 </head>
 
 <body>
+<div class="row menu-button-div" style="margin: 10px;" id="menu-button-div">
+  <button type="button" id=" menu-button" class="btn btn-warning col-lg-12 col-sm-12 col-xs-12 col-md-12">
+    <h2 style="margin:0; font-family: 'Montserratbold'; "><b>Menu</b></h2>
+  </button>
+</div>
 <hr style="margin:0">
-  <nav class="navbar navbar-inverse" style="margin: 0px; background-color: #000000;  border-radius: 0px; font-family: 'Montserratbold'" >
-    <div class="container-fluid">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="index.php"><b>CUT IT</b></a>
-      </div>
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="index.php">Home</a></li>
-        <li class=""><a href="url_shortener.php">URL Shortener</a></li>
-        <li class=""><a href="qr_code_generator.php">QR Code Generator</a></li>
-        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Prashant<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li class=""><a href="profile.php">View Profile</a></li>
-            <li class=""><a href="settings.php">Edit Profile</a></li>
-            <li class=""><a href="sign_out.php">Sign Out</a></li>
-          </ul>
-        </li>
-        <li><a href="about_us.php">About Us</a></li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right" style="padding-left: 15px;">
-        <li><button type="button" class="btn btn-info" style="margin-bottom: 5px; margin-top: 7px; margin-right: 15px; background-color: black;  width: 100px;" id="signup-button"><a href="#login-box"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li></button>
-        <li><button type="button" class="btn btn-info" style="margin-bottom: 5px; margin-top: 7px; margin-right: 15px; background-color: black; width: 100px;"  id="login-button"><a href="#login-box" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li></button>
-      </ul>
+
+<nav class="navbar navbar-inverse menu-div" style="margin: 0px; background-color: #000000;  border-radius: 0px; font-family: 'Montserratbold'" id="menu-div">
+  <div class="container-fluid" >
+    <div class="navbar-header">
+      <a class="navbar-brand" href="index.php"><b>CUT IT</b></a>
     </div>
-  </nav>
-  <hr style="margin:0">
-  <div style="margin: 0px;">
-  
-  <style type="text/css">
-    #signup-button:hover {
-      background-color: white;
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="index.php">Home</a></li>
+      <li class=""><a href="url_shortener.php">URL Shortener</a></li>
+      <li class=""><a href="qr_code_generator.php">QR Code Generator</a></li>
+      <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Prashant<span class="caret"></span></a>
+        <ul class="dropdown-menu">
+          <li class=""><a href="profile.php">View Profile</a></li>
+          <li class=""><a href="settings.php">Edit Profile</a></li>
+          <li class=""><a href="sign_out.php">Sign Out</a></li>
+        </ul>
+      </li>
+      <li><a href="about_us.php">About Us</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right" style="padding-left: 15px;">
+      <li><button type="button" class="btn btn-info" style="margin-bottom: 5px; margin-top: 7px; margin-right: 15px; background-color: black;  width: 100px;" id="signup-button"><a href="#login-box"><span class="glyphicon glyphicon-user" ></span> Sign Up</a></li></button>
+      <li><button type="button" class="btn btn-info" style="margin-bottom: 5px; margin-top: 7px; margin-right: 15px; background-color: black; width: 100px;"  id="login-button"><a href="#login-box" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li></button>
+    </ul>
+  </div>
+</nav>
+<hr style="margin:0">
+<div style="margin: 0px;">
+
+<style type="text/css">
+  #signup-button:hover {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+
+$("#menu-div").hide();
+$("#menu-div").removeClass('menu-div');
+
+$(document).ready(function(){
+
+
+    $("#menu-button-div").click(function(e){
+    if($("#menu-div").hasClass('menu-div'))
+    {
+      $("#menu-div").slideUp('fast'); 
+      $("#menu-div").removeClass('menu-div');
     }
-  </style>
+    else
+    {
+      $("#menu-div").slideDown('fast');
+      $("#menu-div").addClass('menu-div');
+    }
+
+  });
+
+});
+
+</script>
