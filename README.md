@@ -4,7 +4,7 @@
 <ul><b>Features</b>
 <li>Generate Short Links for long url's</li>
 <li>Generate QR Codes for website url's.</li>
-<li>Available for both registered and non-registered users</li>
+<li>Available for both registered and non-registered users.</li>
 <li>Account Management for registered users.</li>
 <li>Fully Responsive web app that can run on any device.</li>
 <li>Easy redirections using generated Short URL's or QR Codes.</li>
