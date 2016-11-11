@@ -11,3 +11,5 @@
 <li>Link activate/deactivate or delete options.</li>
 </ul>
 Live web app : www.cut-it.netne.net
+<br>
+Link for CUT-IT v1 : https://github.com/Prashant-Gangwar/Cut-It-v1
